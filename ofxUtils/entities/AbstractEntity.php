@@ -1,0 +1,19 @@
+<?php
+abstract class AbstractEntity
+{
+    /**
+     * Allow functions to be called as properties
+     * to unify the API
+     *
+     * @param $name
+     * @return method | bool
+     */
+    public function __get($name)
+    {
+        if(method_exists($this, lcfirst($name))) {
+            return $this->{$name}();
+        }
+        return false;
+    }
+}
+
